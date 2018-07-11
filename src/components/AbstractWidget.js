@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 export default class AbstractWidget extends React.Component {
   static propTypes = {
     ready: PropTypes.func.isRequired,
+    onError: PropTypes.func,
   };
 
   static removeChildren(node) {
@@ -45,6 +46,7 @@ export default class AbstractWidget extends React.Component {
       if (!window.twttr) {
         // If the script tag fails to load, scriptjs.ready() will still trigger.
         // Let's avoid the JS exceptions when that happens.
+        this.props.onError();
         console.error('Failure to load window.twttr, aborting load.') // eslint-disable-line no-console
         return
       }

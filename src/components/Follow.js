@@ -4,17 +4,18 @@ import isEqual from 'lodash/isEqual'
 import cloneDeep from 'lodash/cloneDeep'
 import AbstractWidget from './AbstractWidget'
 
-
 export default class Follow extends React.Component {
   static propTypes = {
     username: PropTypes.string.isRequired,
     options: PropTypes.object,
     onLoad: PropTypes.func,
+    onError: PropTypes.func,
   };
 
   static defaultProps = {
     options: {},
     onLoad: () => {},
+    onError: () => {},
   };
 
   shouldComponentUpdate(nextProps) {
@@ -35,6 +36,9 @@ export default class Follow extends React.Component {
   }
 
   render() {
-    return React.createElement(AbstractWidget, { ready: this.ready })
+    return React.createElement(AbstractWidget, {
+      ready: this.ready,
+      onError: this.props.onError,
+    })
   }
 }

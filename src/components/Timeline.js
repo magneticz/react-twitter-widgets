@@ -9,11 +9,13 @@ export default class Timeline extends React.Component {
     dataSource: PropTypes.object.isRequired,
     options: PropTypes.object,
     onLoad: PropTypes.func,
+    onError: PropTypes.func,
   };
 
   static defaultProps = {
     options: {},
     onLoad: () => {},
+    onError: () => {},
   };
 
   shouldComponentUpdate(nextProps) {
@@ -34,6 +36,9 @@ export default class Timeline extends React.Component {
   }
 
   render() {
-    return React.createElement(AbstractWidget, { ready: this.ready })
+    return React.createElement(AbstractWidget, {
+      ready: this.ready,
+      onError: this.props.onError,
+    })
   }
 }
